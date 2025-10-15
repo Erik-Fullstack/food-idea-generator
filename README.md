@@ -22,7 +22,18 @@ Som tidigare nämnt har vi angett att tillämpningen av AI i vårat projekt vari
 
 Det finns också en guardrail som vi själva inte lagt in, men noterade, där vid förekomsten av obscena eller vulgära inputs i receptfältet så skippas generationen av både bilder och recept. Detta ger oss också möjlighet att på ett enkelt sätt justera detta och lägga eller prompta in eventuellt nya "säkerhetsbeteenden" utifrån behov.
 
-I våran backend som är framtagen via Co-pilot (claude), samt i våran frontend så är det inkluderat en semantisk sökningsfunktion via embedding.[semantic_search_service.py](/backend/app/services/semantic_search_service.py), [recipeAPI.ts](/src/lib/recipeAPI.ts), [SavedRecipes.tsx](/src/pages/SavedRecipes.tsx),[recipe_service.py](/backend/app/services/recipe_service.py) (här får varje recept en vektorrepresentation generead vid skapande), [recipes.py](/backend/app/routers/recipes.py).
+I både **backend** (framtagen via Co-pilot/Claude) och **frontend** finns en inbyggd semantisk sökfunktion som använder *embeddings*.
+Följande filer är involverade:
+
+-  **Backend**
+  - [`semantic_search_service.py`](backend/app/services/semantic_search_service.py)
+  - [`recipe_service.py`](backend/app/services/recipe_service.py)  
+    → Här får varje recept en vektorrepresentation genererad vid skapande.
+  - [`recipes.py`](backend/app/routers/recipes.py)
+
+-  **Frontend**
+  - [`recipeAPI.ts`](src/lib/recipeAPI.ts)
+  - [`SavedRecipes.tsx`](src/pages/SavedRecipes.tsx)
 
  Vi har också inkorporerat en funktion som innebär att du kan spara recept. Allt som avser detta, samt env-filer, är skapade av lovable i frontend och sedan via co-pilot (claude) i backend. För tillfället sparas allt lokalt, databas-koden finns men används inte. Vi har inte implementerat någon log-in funktion, dvs att vi inte sparar någon form av persondata. Detta känns säkrare, nu när AI skrivit allt, gällande risken för läckor av persondata. Detta är något man vill ha relativ kontroll över och kunna se över. Man kan absolut implementera detta via AI men i och med brist på tid och pga uppgiftens beskrivning så valde vi att lämna detta ute med insikten att vi inte ville att AI skulle sköta hela den biten.
 
